@@ -7,9 +7,15 @@
     <title>Weather API</title>
   </head>
   <body>
-    <form>
+    <form action="" id="weatherForm">
       <label for="placeName">Place Name</label>
-      <input type="text" id="placeName" name="placeName" required /><br />
+      <input
+        type="text"
+        id="placeName"
+        name="placeName"
+        placeholder="Cardiff"
+        required
+      /><br />
       <label for="weatherDate">Date</label>
       <input type="date" id="weatherDate" name="weatherDate" required /><br />
       <input type="submit" value="Get Weather!" />
