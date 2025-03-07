@@ -11,7 +11,9 @@ function getWeather(placeName) {
     })
     .then(function (response) {
       console.log(response);
-      console.log(response.resolvedAddress);
+      console.log(
+        ` Maximum temperature for ${placeName} on ${response.days[0].datetime} is ${response.days[0].tempmax}, minimum temperature is ${response.days[0].tempmin}, and the overall conditions are ${response.days[0].conditions}.`
+      );
     });
 }
 
