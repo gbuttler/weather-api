@@ -21,43 +21,43 @@ weatherForm.addEventListener("submit", (e) => {
   console.log(chosenDate);
   console.log(placeName);
 
-  function getWeather() {
-    fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${placeName}?unitGroup=metric&key=LLJRM2WGCRY8YRHE89992BHH8&contentType=json`,
-      { mode: "cors" }
-    )
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (response) {
-        console.log(response);
+  async function getWeather() {
+    try {
+      const response = await fetch(
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${placeName}?unitGroup=metric&key=LLJRM2WGCRY8YRHE89992BHH8&contentType=json`,
+        { mode: "cors" }
+      );
+      const weatherData = await response.json();
 
-        //new array to store the data I want in
-        let weatherInfo = [];
+      console.log(weatherData);
 
-        //add to new array containing only data I want
-        for (let i = 0; i < response.days.length; i++) {
-          const newDayInfo = {
-            fulladdress: response.resolvedAddress,
-            datetime: response.days[i].datetime,
-            tempmax: response.days[i].tempmax,
-            tempmin: response.days[i].tempmin,
-            conditions: response.days[i].conditions,
-          };
-          weatherInfo.push(newDayInfo);
+      //new array to store the data I want in
+      let weatherInfo = [];
+
+      //add to new array containing only data I want
+      for (let i = 0; i < weatherData.days.length; i++) {
+        const newDayInfo = {
+          fulladdress: weatherData.resolvedAddress,
+          datetime: weatherData.days[i].datetime,
+          tempmax: weatherData.days[i].tempmax,
+          tempmin: weatherData.days[i].tempmin,
+          conditions: weatherData.days[i].conditions,
+        };
+        weatherInfo.push(newDayInfo);
+      }
+
+      // loop through response
+      for (let j = 0; j < weatherInfo.length; j++) {
+        if (chosenDate === weatherInfo[j].datetime) {
+          console.log(weatherInfo[j].datetime, chosenDate);
+          console.log(
+            ` Maximum temperature for ${placeName} on ${weatherInfo[j].datetime} is ${weatherInfo[j].tempmax}, minimum temperature is ${weatherInfo[j].tempmin}, and the overall conditions are ${weatherInfo[j].conditions}.`
+          );
         }
-
-        // loop through response
-        for (let j = 0; j < weatherInfo.length; j++) {
-          if (chosenDate === weatherInfo[j].datetime) {
-            console.log(weatherInfo[j].datetime, chosenDate);
-            console.log(
-              ` Maximum temperature for ${placeName} on ${weatherInfo[j].datetime} is ${weatherInfo[j].tempmax}, minimum temperature is ${weatherInfo[j].tempmin}, and the overall conditions are ${weatherInfo[j].conditions}.`
-            );
-          }
-        }
-      });
+      }
+    } catch (error) {
+      console.log("Cannot find location, please try again");
+    }
   }
-
   getWeather(placeName);
 });
