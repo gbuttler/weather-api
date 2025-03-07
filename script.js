@@ -56,6 +56,11 @@ weatherForm.addEventListener("submit", (e) => {
         //get div container and fill with content
         let resultsDiv = document.getElementById("weatherResults");
 
+        resultsDiv.innerHTML = "";
+
+        let resultsTitle = document.createElement("h3");
+        resultsTitle.innerHTML = "Results";
+
         let introInfo = document.createElement("p");
         introInfo.classList.add("intro");
         introInfo.innerHTML = `Here are the results for ${placeName} on ${weatherInfo[j].datetime}`;
@@ -97,15 +102,48 @@ weatherForm.addEventListener("submit", (e) => {
         conditionsDiv.appendChild(conditionsData);
 
         //append to container
+        resultsDiv.appendChild(resultsTitle);
         resultsDiv.appendChild(introInfo);
         resultsDiv.appendChild(maxTempDiv);
         resultsDiv.appendChild(minTempDiv);
         resultsDiv.appendChild(conditionsDiv);
+
+        let maxTempNum = weatherInfo[j].tempmax;
+        console.log(maxTempNum);
+
+        if (maxTempNum < 2) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#90908E, white)";
+        } else if (maxTempNum >= 2 && maxTempNum < 8) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#003966, white)";
+        } else if (maxTempNum >= 8 && maxTempNum < 12) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#00541c, white)";
+        } else if (maxTempNum >= 12 && maxTempNum < 16) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#F5E900, white)";
+        } else if (maxTempNum >= 16 && maxTempNum < 20) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#DE8302, white)";
+        } else if (maxTempNum >= 20 && maxTempNum < 25) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#71000f, white)";
+        } else if (maxTempNum >= 25) {
+          document.body.style.backgroundImage =
+            "linear-gradient(#3b0057, white)";
+        } else {
+          document.body.style.backgroundImage =
+            "linear-gradient(#1f83c1, white)";
+        }
       }
     }
   }
   getWeather().catch((err) => {
     console.log(err);
     console.log("I can't find that place, please try again!");
+    alert(
+      `I'm sorry I can't find the weather for ${placeName}. Please try again.`
+    );
   });
 });
