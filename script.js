@@ -52,6 +52,55 @@ weatherForm.addEventListener("submit", (e) => {
         console.log(
           ` Maximum temperature for ${placeName} on ${weatherInfo[j].datetime} is ${weatherInfo[j].tempmax}, minimum temperature is ${weatherInfo[j].tempmin}, and the overall conditions are ${weatherInfo[j].conditions}.`
         );
+
+        //get div container and fill with content
+        let resultsDiv = document.getElementById("weatherResults");
+
+        let introInfo = document.createElement("p");
+        introInfo.classList.add("intro");
+        introInfo.innerHTML = `Here are the results for ${placeName} on ${weatherInfo[j].datetime}`;
+
+        let maxTempDiv = document.createElement("div");
+        maxTempDiv.classList.add("infoDiv");
+        let maxTempTitle = document.createElement("p");
+        maxTempTitle.classList.add("infoTitle");
+        maxTempTitle.innerHTML = "Max temp:";
+        let maxTempData = document.createElement("p");
+        maxTempData.classList.add("infoData");
+        maxTempData.innerHTML = `${weatherInfo[j].tempmax}°C`;
+
+        maxTempDiv.appendChild(maxTempTitle);
+        maxTempDiv.appendChild(maxTempData);
+
+        let minTempDiv = document.createElement("div");
+        minTempDiv.classList.add("infoDiv");
+        let minTempTitle = document.createElement("p");
+        minTempTitle.classList.add("infoTitle");
+        minTempTitle.innerHTML = "Min temp:";
+        let minTempData = document.createElement("p");
+        minTempData.classList.add("infoData");
+        minTempData.innerHTML = ` ${weatherInfo[j].tempmin}°C`;
+
+        minTempDiv.appendChild(minTempTitle);
+        minTempDiv.appendChild(minTempData);
+
+        let conditionsDiv = document.createElement("div");
+        conditionsDiv.classList.add("infoDiv");
+        let conditionsTitle = document.createElement("p");
+        conditionsTitle.classList.add("infoTitle");
+        conditionsTitle.innerHTML = "Overall conditions:";
+        let conditionsData = document.createElement("p");
+        conditionsData.classList.add("infoData");
+        conditionsData.innerHTML = `${weatherInfo[j].conditions}`;
+
+        conditionsDiv.appendChild(conditionsTitle);
+        conditionsDiv.appendChild(conditionsData);
+
+        //append to container
+        resultsDiv.appendChild(introInfo);
+        resultsDiv.appendChild(maxTempDiv);
+        resultsDiv.appendChild(minTempDiv);
+        resultsDiv.appendChild(conditionsDiv);
       }
     }
   }

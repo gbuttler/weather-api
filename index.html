@@ -3,23 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link src="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather API</title>
   </head>
   <body>
-    <form action="" id="weatherForm">
-      <label for="placeName">Place Name</label>
-      <input
-        type="text"
-        id="placeName"
-        name="placeName"
-        placeholder="Cardiff"
-        required
-      /><br />
-      <label for="weatherDate">Date</label>
-      <input type="date" id="weatherDate" name="weatherDate" required /><br />
-      <input type="submit" value="Get Weather!" />
-    </form>
+    <div class="contentDiv">
+      <form action="" id="weatherForm">
+        <h3>Weather picker</h3>
+        <label for="placeName" class="label">Place Name</label>
+        <input
+          type="text"
+          id="placeName"
+          name="placeName"
+          placeholder="Cardiff"
+          required
+        /><br />
+        <label for="weatherDate" class="label">Date</label>
+        <input type="date" id="weatherDate" name="weatherDate" required /><br />
+        <input type="submit" value="Get Weather!" class="button" />
+      </form>
+    </div>
+    <div class="contentDiv">
+      <div id="weatherResults">
+        <h3>Results</h3>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
